@@ -245,7 +245,7 @@ export default function LoginPage() {
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="flex min-h-screen bg-black overflow-hidden relative selection:bg-primary/30 selection:text-white"
+      className="flex flex-col lg:flex-row min-h-screen bg-black overflow-y-auto lg:overflow-hidden relative selection:bg-primary/30 selection:text-white"
       onMouseMove={handleMouseMove}
     >
       <style dangerouslySetInnerHTML={{__html: `
@@ -265,8 +265,8 @@ export default function LoginPage() {
         }
       `}} />
 
-      {/* LEFT SIDE: Visual Branding (Hidden on Mobile) */}
-      <div className="hidden lg:flex w-1/2 relative flex-col justify-end p-16 overflow-hidden z-20 pointer-events-auto">
+      {/* LEFT SIDE: Visual Branding (Visible as Header on Mobile) */}
+      <div className="flex w-full lg:w-1/2 h-[35vh] lg:h-auto relative flex-col justify-end p-8 lg:p-16 overflow-hidden z-20 pointer-events-auto">
         <motion.div 
            initial={{ opacity: 0, scale: 1 }}
            animate={{ opacity: 1, scale: 1.05 }}
@@ -278,8 +278,8 @@ export default function LoginPage() {
            className="absolute inset-[-5%] z-0 origin-center"
         >
           <div className="absolute inset-0 bg-[url('/cafebuddy-login-bg.png')] bg-cover bg-center"></div>
-          {/* Smooth blend overlay instead of harsh split */}
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.9) 100%)' }}></div>
+          {/* Smooth blend overlay optimized for mobile and desktop */}
+          <div className="absolute inset-0 lg:bg-gradient-to-r lg:from-black/85 lg:via-black/40 lg:to-black/90 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
         </motion.div>
         
         {/* Floating Elements & Subtle Orbs */}
@@ -309,11 +309,11 @@ export default function LoginPage() {
              animate={{ opacity: 1, y: 0 }}
              transition={{ delay: 0.5, duration: 0.8, ease: 'easeOut' }}
            >
-             <h2 className="text-5xl lg:text-5xl xl:text-6xl font-black text-white mb-6 leading-[1.1] tracking-tight">
-               Eat Smart,<br/>
-               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400 drop-shadow-lg">Order Faster</span>
+             <h2 className="text-3xl lg:text-5xl xl:text-6xl font-black text-white mb-4 lg:mb-6 leading-[1.1] tracking-tight">
+               Eat Smart,<br className="hidden lg:block" /><span className="lg:hidden"> </span>
+               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400 drop-shadow-lg text-4xl lg:text-5xl xl:text-6xl">Order Faster</span>
              </h2>
-             <p className="text-white/80 text-lg font-medium max-w-md leading-relaxed border-l-2 border-primary pl-5">
+             <p className="hidden lg:block text-white/80 text-lg font-medium max-w-md leading-relaxed border-l-2 border-primary pl-5">
                Browse the full menu, place orders instantly, and track your meal in real time — all from one premium dashboard.
              </p>
            </motion.div>
@@ -321,7 +321,7 @@ export default function LoginPage() {
       </div>
 
       {/* RIGHT SIDE: Login Card */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-6 relative z-10">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-6 lg:p-8 relative z-10 -mt-12 lg:mt-0 pb-16">
         {/* Mobile Background Effects */}
         <div className="absolute inset-0 z-0 lg:hidden">
           <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-primary/20 rounded-full mix-blend-screen filter blur-[150px] animate-pulse"></div>
