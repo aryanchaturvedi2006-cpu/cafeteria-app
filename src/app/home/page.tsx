@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-full">
       {/* Premium Animated Hero Section */}
-      <section className="relative px-4 pt-32 pb-40 overflow-hidden flex flex-col items-center justify-center text-center !bg-transparent">
+      <section className="relative px-4 pt-24 md:pt-32 pb-32 md:pb-40 overflow-hidden flex flex-col items-center justify-center text-center !bg-transparent">
         
         {/* Animated CSS Coffee Gradient Background */}
         <div className="absolute inset-0 z-[-2] bg-gradient-to-b from-[#050505] to-[#0a0f1a] overflow-hidden">
@@ -35,9 +35,9 @@ export default function Home() {
           <div className="absolute top-[30%] left-[40%] w-[800px] h-[800px] bg-primary rounded-full blur-[200px] opacity-[0.08] animate-float-slow pointer-events-none" style={{ animationDelay: '-10s', animationDuration: '18s' }}></div>
 
           {/* Layer 3: Ultra Subtle Food Elements */}
-          <div className="absolute top-[10%] left-[5%] text-[24rem] blur-xl opacity-[0.06] grayscale mix-blend-overlay pointer-events-none animate-float-slow select-none leading-none">🍔</div>
-          <div className="absolute top-[30%] right-[-5%] text-[28rem] blur-xl opacity-[0.05] grayscale mix-blend-soft-light pointer-events-none animate-float-slow select-none leading-none" style={{ animationDelay: '-8s', animationDuration: '14s' }}>☕</div>
-          <div className="absolute bottom-[-15%] left-[25%] text-[30rem] blur-xl opacity-[0.06] grayscale mix-blend-overlay pointer-events-none animate-float-slow select-none leading-none" style={{ animationDelay: '-3s', animationDuration: '20s' }}>🍟</div>
+          <div className="absolute top-[10%] left-[5%] text-[15rem] md:text-[24rem] blur-xl opacity-[0.06] grayscale mix-blend-overlay pointer-events-none animate-float-slow select-none leading-none">🍔</div>
+          <div className="absolute top-[30%] right-[-5%] text-[18rem] md:text-[28rem] blur-xl opacity-[0.05] grayscale mix-blend-soft-light pointer-events-none animate-float-slow select-none leading-none" style={{ animationDelay: '-8s', animationDuration: '14s' }}>☕</div>
+          <div className="absolute bottom-[-15%] left-[25%] text-[20rem] md:text-[30rem] blur-xl opacity-[0.06] grayscale mix-blend-overlay pointer-events-none animate-float-slow select-none leading-none" style={{ animationDelay: '-3s', animationDuration: '20s' }}>🍟</div>
 
           {/* Grain overlay for premium texture */}
           <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/stardust.png")' }}></div>
@@ -54,7 +54,7 @@ export default function Home() {
             <span className="tracking-wide">NOW OPEN & SERVING</span>
           </div>
           
-          <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-8 leading-[1.1] text-white drop-shadow-2xl">
+          <h1 className="text-5xl md:text-8xl font-black tracking-tighter mb-8 leading-[1.1] text-white drop-shadow-2xl">
             Premium Fuel <br className="hidden md:block" />
             for <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-red-600 drop-shadow-[0_0_20px_rgba(255,90,0,0.5)]">Your Mind</span>
           </h1>
@@ -82,7 +82,7 @@ export default function Home() {
       </section>
 
       {/* Popular Items Section */}
-      <section className="py-20 px-4 container mx-auto">
+      <section className="py-12 md:py-20 px-4 container mx-auto">
         <div className="flex items-center justify-between mb-12">
           <h2 className="text-3xl font-bold flex items-center gap-3">
              Popular Right Now

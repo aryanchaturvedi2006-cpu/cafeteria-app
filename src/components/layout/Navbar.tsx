@@ -1,7 +1,8 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, Menu as MenuIcon, User } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
 import { useSystemStore } from '@/store/systemStore';
@@ -15,6 +16,7 @@ export const Navbar = () => {
   const { isOpen } = useSystemStore();
   const { user, login, logout } = useUserStore();
   const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   if (pathname?.includes('/auth')) {
     return null; 
@@ -100,7 +102,10 @@ export const Navbar = () => {
               )}
             </button>
             
-            <button className="md:hidden p-2 text-white hover:bg-white/10 rounded-full">
+            <button 
+              className="md:hidden p-2 text-white hover:bg-white/10 rounded-full"
+              onClick={() => setIsMobileMenuOpen(true)}
+            >
               <MenuIcon className="w-5 h-5" />
             </button>
           </div>
@@ -108,6 +113,109 @@ export const Navbar = () => {
       </nav>
 
       <CartDrawer isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)} />
+
+      {/* Mobile Menu Drawer */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[45] md:hidden"
+            />
+            <motion.div 
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed right-0 top-0 h-full w-[280px] bg-[#0f0f14] border-l border-white/10 z-[50] p-6 flex flex-col md:hidden"
+            >
+              <div className="flex items-center justify-between mb-10">
+                <span className="text-xl font-bold text-white flex items-center gap-2">
+                  <span className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-black">C</span>
+                  Menu
+                </span>
+                <button 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 text-white/50 hover:text-white"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+              </div>
+
+              <div className="flex flex-col gap-6">
+                <Link 
+                  href="/menu" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`text-lg font-medium transition ${pathname === '/menu' ? 'text-primary' : 'text-muted-foreground'}`}
+                >
+                  Browse Menu
+                </Link>
+                {user ? (
+                  <>
+                    <Link 
+                      href="/orders" 
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`text-lg font-medium transition ${pathname === '/orders' ? 'text-primary' : 'text-muted-foreground'}`}
+                    >
+                      My Orders
+                    </Link>
+                    <Link 
+                      href="/favorites" 
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`text-lg font-medium transition ${pathname === '/favorites' ? 'text-primary' : 'text-muted-foreground'}`}
+                    >
+                      Favorites
+                    </Link>
+                    <Link 
+                      href="/settings" 
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`text-lg font-medium transition ${pathname === '/settings' ? 'text-primary' : 'text-muted-foreground'}`}
+                    >
+                      Settings
+                    </Link>
+                    {user.role === 'admin' && (
+                      <Link 
+                        href="/admin" 
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="text-lg font-bold text-primary"
+                      >
+                        Admin Dashboard
+                      </Link>
+                    )}
+                    <button 
+                      onClick={() => { logout(); setIsMobileMenuOpen(false); }}
+                      className="text-lg font-medium text-red-500 text-left mt-4"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <Link 
+                    href="/auth/login" 
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="bg-primary hover:bg-primary-hover text-white text-lg font-bold px-4 py-3 rounded-2xl transition-colors text-center mt-4"
+                  >
+                    Login to Order
+                  </Link>
+                )}
+              </div>
+
+              <div className="mt-auto pt-8 border-t border-white/5 flex flex-col gap-4">
+                <LiveClock />
+                <div className="flex items-center gap-2">
+                  <span className={`relative inline-flex rounded-full h-3 w-3 ${isOpen ? 'bg-green-500' : 'bg-red-500'}`}></span>
+                  <span className="text-sm font-medium text-muted-foreground">
+                    Cafeteria is {isOpen ? 'Open Now' : 'Closed'}
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 };

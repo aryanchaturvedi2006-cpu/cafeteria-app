@@ -109,32 +109,32 @@ export const MenuItemCard = ({ item, index }: MenuItemCardProps) => {
         )}
       </div>
 
-      <div className="p-5 flex flex-col flex-1 bg-gradient-to-b from-transparent to-black/20">
-        <div className="flex justify-between items-start mb-1 gap-2">
-          <h3 className="font-bold text-lg text-white leading-tight">{item.name}</h3>
+      <div className="p-3 md:p-5 flex flex-col flex-1 bg-gradient-to-b from-transparent to-black/20">
+        <div className="flex justify-between items-start mb-1 gap-1 md:gap-2">
+          <h3 className="font-bold text-sm md:text-lg text-white leading-tight line-clamp-1 md:line-clamp-none">{item.name}</h3>
         </div>
-        <div className="font-extrabold text-xl text-white mb-2 tracking-tight">₹{item.price}</div>
+        <div className="font-extrabold text-base md:text-xl text-white mb-2 tracking-tight">₹{item.price}</div>
         <p className="text-muted-foreground text-xs md:text-sm flex-1 mb-5 line-clamp-2 leading-relaxed">
           {item.description}
         </p>
 
         {cartQuantity > 0 ? (
-           <div className="w-full h-11 flex items-center justify-between bg-primary/20 border border-primary/30 rounded-xl overflow-hidden text-white font-medium shadow-[0_0_15px_rgba(255,90,0,0.2)]">
-             <button onClick={handleRemove} className="w-12 h-full flex items-center justify-center hover:bg-primary/30 transition-colors text-lg active:scale-95">-</button>
-             <span className="flex-1 text-center font-bold text-lg">{cartQuantity}</span>
-             <button onClick={handleAdd} className="w-12 h-full flex items-center justify-center hover:bg-primary/30 transition-colors text-lg active:scale-95">+</button>
+           <div className="w-full h-9 md:h-11 flex items-center justify-between bg-primary/20 border border-primary/30 rounded-xl overflow-hidden text-white font-medium shadow-[0_0_15px_rgba(255,90,0,0.2)]">
+             <button onClick={handleRemove} className="w-8 md:w-12 h-full flex items-center justify-center hover:bg-primary/30 transition-colors text-base md:text-lg active:scale-95">-</button>
+             <span className="flex-1 text-center font-bold text-base md:text-lg">{cartQuantity}</span>
+             <button onClick={handleAdd} className="w-8 md:w-12 h-full flex items-center justify-center hover:bg-primary/30 transition-colors text-base md:text-lg active:scale-95">+</button>
            </div>
         ) : (
           <button
             onClick={handleAdd}
             disabled={!item.isAvailable || !isOpen}
-            className={`w-full h-11 rounded-xl font-bold flex items-center justify-center gap-2 transition-all duration-300 ${
+            className={`w-full h-9 md:h-11 rounded-xl font-bold flex items-center justify-center gap-1 md:gap-2 transition-all duration-300 text-xs md:text-sm ${
               item.isAvailable && isOpen
                 ? 'bg-white/10 border border-white/5 hover:bg-primary hover:border-primary hover:text-white text-white group-hover:shadow-[0_0_20px_rgba(255,90,0,0.3)]'
                 : 'bg-white/5 text-white/30 cursor-not-allowed border border-transparent'
             }`}
           >
-            {isOpen ? <><Plus className="w-4 h-4" /> Add</> : 'Closed'}
+            {isOpen ? <><Plus className="w-3 md:w-4 h-3 md:h-4" /> Add</> : 'Closed'}
           </button>
         )}
       </div>
