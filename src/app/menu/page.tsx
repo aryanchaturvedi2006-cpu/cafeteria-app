@@ -11,10 +11,14 @@ import { useCartStore } from "@/store/cartStore";
 const CATEGORIES = [
   "Breakfast & Drinks",
   "Snacks & Sandwiches",
+  "Chaat (4PM-7PM)",
+  "Maggi Magic Bowls",
   "Finger Foods & Noodles",
   "Pizza",
   "South Indian",
+  "Juices & Shakes",
   "Mini Meals & Rice",
+  "Ice Creams",
   "Desserts & Bakery"
 ];
 
