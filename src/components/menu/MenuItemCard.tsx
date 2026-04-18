@@ -67,27 +67,27 @@ export const MenuItemCard = ({ item, index }: MenuItemCardProps) => {
       transition={{ delay: (index % 10) * 0.05, duration: 0.4 }}
       className={`relative group rounded-2xl overflow-hidden bg-[#15151a] border border-white/5 transition-all duration-300 hover:scale-[1.02] hover:border-primary/40 hover:shadow-2xl flex flex-col ${!item.isAvailable ? 'opacity-60 grayscale-[50%]' : ''}`}
     >
-      <div className="relative h-[110px] md:h-[150px] w-full overflow-hidden flex items-center justify-center">
-        {/* Fill Image (Zomato Style) */}
+      <div className="w-full aspect-[16/9] overflow-hidden rounded-xl bg-[#f5f5f5] relative flex items-center justify-center m-0.5">
+        {/* Full Image - Contain (No Cropping) */}
         <img 
           src={item.imageUrl || 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=80&w=600'} 
           onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=80&w=600'; }}
           alt={item.name} 
           loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
+          className="w-full h-full object-contain transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110"
         />
         
         {/* Heart Icon Overlay */}
         <button 
           onClick={handleFavorite}
-          className="absolute top-2 right-2 z-30 p-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-white transition-all hover:scale-110 active:scale-95"
+          className="absolute top-2 right-2 z-30 p-1.5 rounded-full bg-black/30 backdrop-blur-md border border-white/10 text-white transition-all hover:scale-110 active:scale-95"
         >
           <Heart className={`w-3.5 h-3.5 transition-colors ${isFav ? 'fill-red-500 text-red-500' : 'text-white/80'}`} />
         </button>
         
         {/* Veg Badge Overlay */}
         {item.isVeg && (
-          <div className="absolute top-2 left-2 z-20 bg-black/40 backdrop-blur-md p-1 rounded flex items-center justify-center border border-white/10">
+          <div className="absolute top-2 left-2 z-20 bg-white/80 backdrop-blur-md p-1 rounded flex items-center justify-center border border-black/10">
             <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]"></div>
           </div>
         )}
@@ -121,7 +121,7 @@ export const MenuItemCard = ({ item, index }: MenuItemCardProps) => {
         </p>
 
         {cartQuantity > 0 ? (
-            <div className="w-full h-8 md:h-9 flex items-center justify-between bg-primary/20 border border-primary/30 rounded-lg overflow-hidden text-white font-medium">
+            <div className="w-full h-8 flex items-center justify-between bg-primary/20 border border-primary/30 rounded-lg overflow-hidden text-white font-medium">
               <button onClick={handleRemove} className="w-8 md:w-10 h-full flex items-center justify-center hover:bg-primary/30 transition-colors text-sm">-</button>
               <span className="flex-1 text-center font-bold text-xs md:text-sm">{cartQuantity}</span>
               <button onClick={handleAdd} className="w-8 md:w-10 h-full flex items-center justify-center hover:bg-primary/30 transition-colors text-sm">+</button>
@@ -130,7 +130,7 @@ export const MenuItemCard = ({ item, index }: MenuItemCardProps) => {
            <button
              onClick={handleAdd}
              disabled={!item.isAvailable || !isOpen}
-             className={`w-full h-8 md:h-9 rounded-lg font-bold flex items-center justify-center gap-1 transition-all duration-300 text-[10px] md:text-xs ${
+             className={`w-full h-8 rounded-lg font-bold flex items-center justify-center gap-1 transition-all duration-300 text-[10px] md:text-xs ${
                item.isAvailable && isOpen
                  ? 'bg-white/10 border border-white/5 hover:bg-primary hover:border-primary hover:text-white text-white'
                  : 'bg-white/5 text-white/30 cursor-not-allowed border border-transparent'
