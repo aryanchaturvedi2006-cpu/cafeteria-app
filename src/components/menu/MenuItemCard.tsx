@@ -67,8 +67,16 @@ export const MenuItemCard = ({ item, index }: MenuItemCardProps) => {
       transition={{ delay: (index % 10) * 0.05, duration: 0.4 }}
       className={`relative group rounded-2xl overflow-hidden bg-[#15151a] border border-white/5 transition-all duration-300 hover:scale-[1.02] hover:border-primary/40 hover:shadow-xl flex flex-col ${!item.isAvailable ? 'opacity-60 grayscale-[50%]' : ''}`}
     >
-      <div className="relative h-[120px] md:h-[160px] w-full overflow-hidden bg-white/5 flex items-center justify-center">
-        {/* Full image visibility with contain */}
+      <div className="relative h-[120px] md:h-[160px] w-full overflow-hidden flex items-center justify-center">
+        {/* Blurred Background Fill to eliminate side spaces */}
+        <img 
+          src={item.imageUrl || 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=80&w=600'} 
+          onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=80&w=600'; }}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-40 scale-110"
+        />
+        
+        {/* Full Sharp Image - Contain (No Cropping) */}
         <button 
           onClick={handleFavorite}
           className="absolute top-3 right-3 z-30 p-2 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-white transition-all hover:scale-110 active:scale-95"
@@ -80,7 +88,7 @@ export const MenuItemCard = ({ item, index }: MenuItemCardProps) => {
           onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=80&w=600'; }}
           alt={item.name} 
           loading="lazy"
-          className="w-full h-full object-contain transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
+          className="relative z-10 w-full h-full object-contain transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
         />
         
         {/* Veg Badge */}
