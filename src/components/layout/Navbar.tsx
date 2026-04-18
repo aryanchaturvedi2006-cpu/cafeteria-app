@@ -10,6 +10,7 @@ import { useUserStore } from '@/store/userStore';
 import { CartDrawer } from '@/components/ui/CartDrawer';
 import { Button } from '@/components/ui/Button';
 import { LiveClock } from '@/components/ui/LiveClock';
+import { signOut } from 'next-auth/react';
 
 export const Navbar = () => {
   const { totalItems, isDrawerOpen, setDrawerOpen } = useCartStore();
@@ -22,9 +23,10 @@ export const Navbar = () => {
     return null; 
   }
 
-  const handleAuth = () => {
+  const handleAuth = async () => {
     if (user) {
       logout();
+      await signOut({ callbackUrl: '/auth/login' });
     } else {
       login({ uid: 'mock_uid', name: 'John Doe', email: 'john@example.com', role: 'user' });
     }
@@ -186,7 +188,11 @@ export const Navbar = () => {
                       </Link>
                     )}
                     <button 
-                      onClick={() => { logout(); setIsMobileMenuOpen(false); }}
+                      onClick={async () => { 
+                        logout(); 
+                        setIsMobileMenuOpen(false); 
+                        await signOut({ callbackUrl: '/auth/login' });
+                      }}
                       className="text-lg font-medium text-red-500 text-left mt-4"
                     >
                       Logout

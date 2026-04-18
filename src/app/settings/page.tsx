@@ -24,8 +24,7 @@ export default function SettingsPage() {
 
   const handleLogout = async () => {
     logout();
-    await nextAuthSignOut({ redirect: false });
-    router.push('/auth/login');
+    await nextAuthSignOut({ callbackUrl: '/auth/login' });
   };
 
   return (

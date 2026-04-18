@@ -7,7 +7,7 @@ import { useCartStore } from '@/store/cartStore';
 import { usePathname } from 'next/navigation';
 
 export function CartBar() {
-  const { totalItems, totalPrice, setDrawerOpen } = useCartStore();
+  const { totalItems, totalPrice, setDrawerOpen, isDrawerOpen } = useCartStore();
   const itemsCount = totalItems();
   const pathname = usePathname();
 
@@ -17,7 +17,7 @@ export function CartBar() {
 
   return (
     <AnimatePresence>
-      {itemsCount > 0 && (
+      {itemsCount > 0 && !isDrawerOpen && (
         <motion.div 
           initial={{ y: 150, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -33,7 +33,7 @@ export function CartBar() {
               <span className="text-xl font-black">₹{totalPrice().toFixed(2)}</span>
             </div>
             <div className="flex items-center gap-2 font-bold text-white bg-white/20 px-4 py-2 rounded-xl backdrop-blur-md group-hover:bg-white/30 transition">
-              View Cart <ShoppingBag className="w-5 h-5 ml-1" />
+              See my cart <ShoppingBag className="w-5 h-5 ml-1" />
             </div>
           </button>
         </motion.div>

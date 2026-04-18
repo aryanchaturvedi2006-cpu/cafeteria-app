@@ -65,11 +65,10 @@ export const MenuItemCard = ({ item, index }: MenuItemCardProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ delay: (index % 10) * 0.05, duration: 0.4 }}
-      className={`relative group rounded-3xl overflow-hidden glass-panel border border-white/5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_15px_40px_rgb(255,90,0,0.2)] flex flex-col ${!item.isAvailable ? 'opacity-60 grayscale-[50%]' : ''}`}
+      className={`relative group rounded-2xl overflow-hidden bg-[#15151a] border border-white/5 transition-all duration-300 hover:scale-[1.02] hover:border-primary/40 hover:shadow-xl flex flex-col ${!item.isAvailable ? 'opacity-60 grayscale-[50%]' : ''}`}
     >
-      <div className="relative aspect-square w-full overflow-hidden bg-[#15151a]">
-        {/* Placeholder styling instead of real images to ensure it looks good even with placeholders */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f14] via-transparent to-transparent z-10"></div>
+      <div className="relative h-[120px] md:h-[160px] w-full overflow-hidden bg-white/5 flex items-center justify-center">
+        {/* Full image visibility with contain */}
         <button 
           onClick={handleFavorite}
           className="absolute top-3 right-3 z-30 p-2 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-white transition-all hover:scale-110 active:scale-95"
@@ -81,7 +80,7 @@ export const MenuItemCard = ({ item, index }: MenuItemCardProps) => {
           onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=80&w=600'; }}
           alt={item.name} 
           loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 image-premium-load"
+          className="w-full h-full object-contain transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
         />
         
         {/* Veg Badge */}
@@ -109,35 +108,35 @@ export const MenuItemCard = ({ item, index }: MenuItemCardProps) => {
         )}
       </div>
 
-      <div className="p-3 md:p-5 flex flex-col flex-1 bg-gradient-to-b from-transparent to-black/20">
-        <div className="flex justify-between items-start mb-1 gap-1 md:gap-2">
-          <h3 className="font-bold text-sm md:text-lg text-white leading-tight line-clamp-1 md:line-clamp-none">{item.name}</h3>
+      <div className="p-2 md:p-3 flex flex-col flex-1 bg-transparent">
+        <div className="flex justify-between items-start mb-0.5 gap-1">
+          <h3 className="font-bold text-sm md:text-base text-white leading-tight line-clamp-1">{item.name}</h3>
         </div>
-        <div className="font-extrabold text-base md:text-xl text-white mb-2 tracking-tight">₹{item.price}</div>
-        <p className="text-muted-foreground text-xs md:text-sm flex-1 mb-5 line-clamp-2 leading-relaxed">
+        <div className="font-bold text-xs md:text-sm text-primary mb-1">₹{item.price}</div>
+        <p className="text-muted-foreground text-[10px] md:text-xs flex-1 mb-3 line-clamp-2 leading-tight">
           {item.description}
         </p>
 
         {cartQuantity > 0 ? (
-           <div className="w-full h-9 md:h-11 flex items-center justify-between bg-primary/20 border border-primary/30 rounded-xl overflow-hidden text-white font-medium shadow-[0_0_15px_rgba(255,90,0,0.2)]">
-             <button onClick={handleRemove} className="w-8 md:w-12 h-full flex items-center justify-center hover:bg-primary/30 transition-colors text-base md:text-lg active:scale-95">-</button>
-             <span className="flex-1 text-center font-bold text-base md:text-lg">{cartQuantity}</span>
-             <button onClick={handleAdd} className="w-8 md:w-12 h-full flex items-center justify-center hover:bg-primary/30 transition-colors text-base md:text-lg active:scale-95">+</button>
-           </div>
-        ) : (
-          <button
-            onClick={handleAdd}
-            disabled={!item.isAvailable || !isOpen}
-            className={`w-full h-9 md:h-11 rounded-xl font-bold flex items-center justify-center gap-1 md:gap-2 transition-all duration-300 text-xs md:text-sm ${
-              item.isAvailable && isOpen
-                ? 'bg-white/10 border border-white/5 hover:bg-primary hover:border-primary hover:text-white text-white group-hover:shadow-[0_0_20px_rgba(255,90,0,0.3)]'
-                : 'bg-white/5 text-white/30 cursor-not-allowed border border-transparent'
-            }`}
-          >
-            {isOpen ? <><Plus className="w-3 md:w-4 h-3 md:h-4" /> Add</> : 'Closed'}
-          </button>
-        )}
-      </div>
-    </motion.div>
+            <div className="w-full h-8 md:h-10 flex items-center justify-between bg-primary/20 border border-primary/30 rounded-lg overflow-hidden text-white font-medium">
+              <button onClick={handleRemove} className="w-8 md:w-10 h-full flex items-center justify-center hover:bg-primary/30 transition-colors text-sm md:text-base">-</button>
+              <span className="flex-1 text-center font-bold text-sm md:text-base">{cartQuantity}</span>
+              <button onClick={handleAdd} className="w-8 md:w-10 h-full flex items-center justify-center hover:bg-primary/30 transition-colors text-sm md:text-base">+</button>
+            </div>
+         ) : (
+           <button
+             onClick={handleAdd}
+             disabled={!item.isAvailable || !isOpen}
+             className={`w-full h-8 md:h-10 rounded-lg font-bold flex items-center justify-center gap-1 transition-all duration-300 text-[10px] md:text-xs ${
+               item.isAvailable && isOpen
+                 ? 'bg-white/10 border border-white/5 hover:bg-primary hover:border-primary hover:text-white text-white'
+                 : 'bg-white/5 text-white/30 cursor-not-allowed border border-transparent'
+             }`}
+           >
+             {isOpen ? <><Plus className="w-3 h-3" /> Add</> : 'Closed'}
+           </button>
+         )}
+       </div>
+     </motion.div>
   );
 };

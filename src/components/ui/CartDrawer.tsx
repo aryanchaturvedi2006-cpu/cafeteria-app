@@ -109,7 +109,7 @@ export const CartDrawer = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
                 </div>
                 
                 <Button 
-                  className="w-full shadow-[0_0_15px_rgba(255,90,0,0.3)]" 
+                  className="w-full" 
                   size="lg" 
                   onClick={() => {
                     onClose();
@@ -117,7 +117,7 @@ export const CartDrawer = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
                   }}
                   disabled={!isCafeteriaOpen}
                 >
-                  {isCafeteriaOpen ? 'Proceed to Checkout' : 'Cafeteria Closed'}
+                  {isCafeteriaOpen ? 'Proceed to Pay' : 'Cafeteria Closed'}
                 </Button>
               </div>
             )}

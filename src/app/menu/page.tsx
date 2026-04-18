@@ -117,7 +117,7 @@ export default function MenuPage() {
       {/* Menu Content */}
       <div className="px-4 sm:px-8 max-w-7xl mx-auto mt-8">
         {isLoading ? (
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
             {[...Array(6)].map((_, i) => (
               <div key={i} className="flex gap-4 p-4 rounded-3xl bg-[#15151a] border border-white/5 skeleton h-[180px]">
                  <div className="w-1/3 rounded-2xl bg-white/5"></div>
@@ -138,7 +138,7 @@ export default function MenuPage() {
         ) : isSearching ? (
           <div>
             <h2 className="text-xl font-bold mb-6 text-white">Search Results</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
               {filteredItems.length > 0 ? (
                 filteredItems.map((item, index) => (
                   <MenuItemCard key={item.id} item={item} index={index} />
@@ -159,7 +159,7 @@ export default function MenuPage() {
               return (
                 <div key={category} id={category.replace(/\s+/g, '-').toLowerCase()} className="scroll-mt-40">
                   <h2 className="text-xl md:text-2xl font-bold mb-6 text-white pb-2 border-b border-white/10">{category}</h2>
-                  <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-6">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
                     {categoryItems.map((item, index) => (
                       <MenuItemCard key={item.id} item={item} index={index} />
                     ))}
